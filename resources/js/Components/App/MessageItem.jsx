@@ -29,7 +29,7 @@ const MessageItem = ({ message }) => {
             </div>
             <div
                 className={
-                       "chat-bubble relative" +
+                       "chat-bubble relative " +
                     (message.sender_id === currentUser.id
                     ? " chat-bubble-info"
                     : "")
