@@ -13,7 +13,7 @@
     background-color: theme('colors.gray.900');
 }
 
-.conversation-item  .avatar  .online::before,
+.conversation-item .avatar .online::before,
 .conversation-item .avatar .offline::before {
     width: 8px !important;
     height: 8px !important;

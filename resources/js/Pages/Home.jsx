@@ -7,6 +7,8 @@ import ConversationHeader from '@/Components/App/ConversationHeader.jsx';
 import MessageItem from '@/Components/App/MessageItem.jsx';
 import MessageInput from '@/Components/App/MessageInput.jsx';
 import { useEventBus } from '@/EventBus';
+import AttachmentPreviewModal
+    from '@/Components/App/AttachmentPreviewModal.jsx';
 
 
  function Home({ selectedConversation = null, messages = null }) {
@@ -16,6 +18,8 @@ import { useEventBus } from '@/EventBus';
         const [scrollFromBottom, setScrollFromBottom] = useState(0);
      const loadMoreIntersect = useRef(null);
      const messagesCtrRef = useRef(null);
+     const [showAttachmentPreview, setShowAttachmentPreview] = useState(false);
+     const [previewAttachment, setPreviewAttachment] = useState({});
      const { on } = useEventBus();
     const messageCreated = (message) => {
         if(
@@ -68,6 +72,14 @@ import { useEventBus } from '@/EventBus';
                 });
             });
     }, [localMessages, noMoreMessages]);
+
+    const onAttachmentClick = (attachments, index) => {
+        setPreviewAttachment({
+            attachments,
+            index,
+        });
+        setShowAttachmentPreview(true);
+    }
 
      useEffect(() => {
          setTimeout(() => {
@@ -161,6 +173,7 @@ import { useEventBus } from '@/EventBus';
                                     <MessageItem
                                         key={message.id}
                                         message={message}
+                                        attachmentClick={onAttachmentClick}
                                     />
                                 ))}
                             </div>
@@ -169,6 +182,15 @@ import { useEventBus } from '@/EventBus';
                     <MessageInput conversation={selectedConversation} />
                 </>
             )}
+
+            {previewAttachment.attachments && (
+                <AttachmentPreviewModal
+                    attachments={previewAttachment.attachments}
+                    index={previewAttachment.index}
+                    show={showAttachmentPreview}
+                    onClose={() => setShowAttachmentPreview(false)}
+                />
+                )}
     </>)
 }
 
