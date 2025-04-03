@@ -12,6 +12,7 @@ import { Popover, Transition} from '@headlessui/react';
 import AttachmentPreview from '@/Components/App/AttachmentPreview.jsx';
 import CustomAudioPlayer from '@/Components/App/CustomAudioPlayer.jsx';
 import { isAudio, isImage } from '@/helpers.jsx';
+import AudioRecorder from '@/Components/App/AudioRecorder.jsx';
 
 const MessageInput = ({ conversation = null }) => {
     const [newMessage, setNewMessage] = useState('');
@@ -27,6 +28,7 @@ const MessageInput = ({ conversation = null }) => {
             return {
                 file: file,
                 url: URL.createObjectURL(file),
+                id: `${file.name}-${Date.now()}-${index}`, // Unique ID
             };
         });
 
@@ -103,6 +105,13 @@ const MessageInput = ({ conversation = null }) => {
 
     };
 
+    const recordedAudioReady = (file, url) => {
+        setChosenFiles((prevFiles) => [
+            ...prevFiles,
+            { file, url, id: `${file.name}-${Date.now()}` }
+        ]);
+    };
+
     return (
       <div className="flex flex-wrap items-start border-t border-slate-700 py-3">
             <div className="order-2 flex-1 xs:flex-none xs:order-1 p-2">
@@ -127,6 +136,7 @@ const MessageInput = ({ conversation = null }) => {
                         cursor-pointer"
                     />
                 </button>
+                <AudioRecorder fileReady={recordedAudioReady}/>
             </div>
 
             <div className="order-1 px-3 xs:p-0 min-w-[220px] basis-full xs:basis-0
@@ -159,7 +169,7 @@ const MessageInput = ({ conversation = null }) => {
                 <div className="flex flex-wrap gap-1 mt-2">
                     {chosenFiles.map((file) => (
                         <div
-                            key={file.file.name}
+                            key={file.id}
                             className={
                             `relative flex justify-between cursor-pointer` +
                                 (!isImage(file.file) ? " w-[240px]" : "")
@@ -173,10 +183,12 @@ const MessageInput = ({ conversation = null }) => {
                                 />
                             )}
                             {isAudio(file.file) && (
-                                <CustomAudioPlayer
-                                    src={file}
+                                <>
+                                    <CustomAudioPlayer
+                                    file={file}
                                     showVolume={false}
                                 />
+                                </>
                                 // <audio src={file.url} controls ></audio>
                             )}
                             {!isAudio(file.file) &&  !isImage(file.file) && (

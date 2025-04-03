@@ -81,7 +81,7 @@ const MessageAttachments = ({ attachments, attachmentClick }) => {
                       </div>
                   ))}
               </div>
-          )};
+          )}
       </>
     );
 };
