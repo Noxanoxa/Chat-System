@@ -167,3 +167,15 @@ The chat interface displays a list of conversations on the left and the selected
 ![Chat Interface](screenshots/chat-interface.png)
 
 ![Chat Interface with File Preview](screenshots/chat-interface-file-preview.png)
+
+## Demo Video
+
+Check out a quick demo of the Chat System in action! This GIF showcases the login process, real-time messaging between users, and file sharing functionality. The demo highlights the seamless integration of Laravel Reverb for WebSocket communication and the responsive React frontend.
+
+![Chat System Demo](screenshots/chat-system-demo.mp4)
+
+The demo includes:
+- User authentication via the login page.
+- Navigating the chat interface to select conversations.
+- Sending and receiving real-time messages.
+- Previewing shared files within the chat.
