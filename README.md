@@ -149,3 +149,21 @@ npm run dev
 Open your browser and go to:
 ```
 http://localhost:8000
+```
+
+
+## Screenshots
+
+Below are some screenshots of the Chat System in action, showcasing the login page and the real-time chat interface.
+
+### Login Page
+The login page allows users to authenticate using their email and password, powered by Laravel Breeze for secure authentication.
+
+![Login Page](screenshots/login-page.png)
+
+### Chat Interface
+The chat interface displays a list of conversations on the left and the selected conversation on the right. It supports real-time messaging using Laravel Reverb for WebSocket communication.
+
+![Chat Interface](screenshots/chat-interface.png)
+
+![Chat Interface with File Preview](screenshots/chat-interface-file-preview.png)
